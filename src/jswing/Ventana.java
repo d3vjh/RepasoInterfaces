@@ -7,15 +7,25 @@ import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 public class Ventana extends JFrame {
 
@@ -46,7 +56,7 @@ public class Ventana extends JFrame {
 		this.setMinimumSize(new Dimension(200, 200));
 
 		// Primero se obtiene el contendo de la ventana, y luego se establece el color
-		// this.getContentPane().setBackground(Color.BLUE);
+		this.getContentPane().setBackground(Color.CYAN);
 
 		iniciarComponentes();
 
@@ -59,7 +69,13 @@ public class Ventana extends JFrame {
 		// crearBotones();
 		// crearRadioBotones();
 		// crearBotonesdeActivacion();
-		crearCajasdeTexto();
+		// crearCajasdeTexto();
+		// crearAreasdeTexto();
+		// crearCasillas();
+		// crearListasDespegables();
+		 crearContraseña();
+		//crearTablas();
+		
 
 	}
 
@@ -206,10 +222,122 @@ public class Ventana extends JFrame {
 		JTextField txt1 = new JTextField();
 		txt1.setBounds(50, 50, 100, 30);
 		txt1.setText("NOOOOOOOO!!!!!");
-		System.out.println("Esto es lo que hay en la caja"+txt1.getText());
-		
+		System.out.println("Esto es lo que hay en la caja" + txt1.getText());
+
 		panel.add(txt1);
 
 	}
 
+	private void crearAreasdeTexto() {
+
+		JTextArea txtA1 = new JTextArea();
+		txtA1.setBounds(20, 20, 300, 200);
+		txtA1.setText("NOOOOOOOO!!!!!");
+		System.out.println("Esto es lo que hay en la caja" + txtA1.getText());
+
+		panel.add(txtA1);
+
+		JScrollPane barrasDesplz = new JScrollPane(txtA1);
+
+		// Es importante que tenga el mismo posicionamiento
+		barrasDesplz.setBounds(20, 20, 300, 200);
+
+		// se aprecian solo cuando se necesiten
+		barrasDesplz.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		barrasDesplz.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+		panel.add(barrasDesplz);
+
+	}
+
+	private void crearCasillas() {
+
+		JCheckBox cbx1 = new JCheckBox("Leche", true);
+		cbx1.setBounds(20, 20, 100, 40);
+
+		JCheckBox cbx2 = new JCheckBox("Galletas");
+		cbx2.setBounds(20, 60, 100, 40);
+
+		JCheckBox cbx3 = new JCheckBox("Cereal");
+		cbx3.setBounds(20, 100, 100, 40);
+
+		JCheckBox cbx4 = new JCheckBox("Jamón");
+		cbx4.setBounds(20, 100, 100, 40);
+
+		panel.add(cbx1);
+		panel.add(cbx2);
+		panel.add(cbx3);
+		panel.add(cbx4);
+
+	}
+
+	private void crearListasDespegables() {
+
+//		String [] Nombres = {"Jhonatan", "David", "Daniela", "Juana", "Rocky"};
+//		
+//		JComboBox cmb1 = new JComboBox(Nombres);
+//		cmb1.setBounds(20, 20, 100, 30);
+//		cmb1.addItem("Perra");
+//		cmb1.setSelectedItem("David");
+//		panel.add(cmb1);
+
+		Persona persona1 = new Persona("Jhonatan", 19, "Colombia");
+		Persona persona2 = new Persona("Daviid", 29, "Perro Hpta");
+
+		DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+		JComboBox listaDesplegable = new JComboBox(modelo);
+
+		modelo.addElement(persona1);
+		modelo.addElement(persona2);
+		listaDesplegable.setBounds(20, 20, 200, 30);
+		panel.add(listaDesplegable);
+
+	}
+
+	private void crearContraseña() {
+
+		JPasswordField pwd = new JPasswordField();
+		pwd.setBounds(20, 20, 150, 30);
+		pwd.setText("Esta es mi contraseña");
+		System.out.println(pwd.getPassword());
+
+		panel.add(pwd);
+
+	}
+
+	private void crearTablas() {
+
+		DefaultTableModel modelo = new DefaultTableModel();
+		
+		modelo.addColumn("Nombre");
+		modelo.addColumn("Edad");
+		modelo.addColumn("Nacionalidad");
+		
+		
+		
+		String [] persona1 = {"Jhonatan", "21", "Colombiano"};		
+		String [] persona2 = {"Maria", "11", "Chilena"};		
+
+		modelo.addRow(persona1);
+		modelo.addRow(persona2);
+		
+		
+		JTable tbl = new JTable(modelo);
+		
+		tbl.setBounds(20, 20, 300, 200);
+		
+		panel.add(tbl);
+		JScrollPane scroll = new JScrollPane(tbl, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//		scroll.setBounds(tbl.getX(), tbl.getY(), tbl.getWidth(), tbl.getHeight());
+		scroll.setBounds(20,20,300,200);
+
+		
+		panel.add(scroll);
+		
+		
+		
+		
+	}
+	
+	
 }
